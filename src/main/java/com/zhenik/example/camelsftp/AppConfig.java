@@ -35,6 +35,22 @@ public final class AppConfig {
     final Config config = ConfigFactory.load();
     final Config fileSysConfig  = config.getConfig("camel-sftp.file-system");
     final Config sftpConfig  = config.getConfig("camel-sftp.sftp-server");
-    return new AppConfig(fileSysConfig,sftpConfig);
+    AppConfig appConfig =  new AppConfig(fileSysConfig,sftpConfig);
+    System.out.println(appConfig.toString());
+    return appConfig;
+  }
+
+  @Override
+  public String toString() {
+    return "AppConfig{" +
+        "fileSysDirInput='" + fileSysDirInput + '\'' +
+        ", fileSysDirOutput='" + fileSysDirOutput + '\'' +
+        ", sftpHost='" + sftpHost + '\'' +
+        ", sftpPort=" + sftpPort +
+        ", sftpUsername='" + sftpUsername + '\'' +
+        ", sftpPassword='" + sftpPassword + '\'' +
+        ", sftpDirInput='" + sftpDirInput + '\'' +
+        ", sftpDirOutput='" + sftpDirOutput + '\'' +
+        '}';
   }
 }

@@ -1,0 +1,12 @@
+---
+# https://github.com/atmoz/sftp#using-docker-compose
+version: '3'
+services:
+  sftp:
+    image: atmoz/sftp:alpine-3.7
+    volumes:
+        - ./samples/sftp/input:/home/foo/samples/sftp/input
+        - ./samples/sftp/output:/home/foo/samples/sftp/output
+    ports:
+        - "2222:22"
+    command: foo:pass:1001

@@ -7,10 +7,28 @@ import org.apache.camel.builder.RouteBuilder;
  */
 public class SendRouteBuilder extends RouteBuilder {
 
+  private final AppConfig config;
+
+  public SendRouteBuilder(final AppConfig config) {
+    this.config=config;
+  }
+
   public void configure() throws Exception {
-    final String path1 = "samples/filesystem/input";
-    final String path2 = "samples/sftp/input";
-    from("file:"+path1+"?noop=true")
-        .to("file:"+path2);
+    final String fileSystemInputDir = "file:"+config.fileSysDirInput +"?noop=true";
+
+    // uri: sftp://foo@localhost:2222/samples/sftp/input?password=pass
+    final String sftpInputDir = "sftp://"
+        + config.sftpUsername
+        + "@"
+        + config.sftpHost
+        + ":"
+        + config.sftpPort
+        + config.sftpDirInput
+        + "?password="
+        + config.sftpPassword;
+
+    from(fileSystemInputDir)
+        // Send file to SFTP Server
+        .to(sftpInputDir);
   }
 }

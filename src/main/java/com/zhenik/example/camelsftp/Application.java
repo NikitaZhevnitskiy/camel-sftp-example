@@ -9,9 +9,10 @@ import org.apache.camel.impl.DefaultCamelContext;
 public class Application {
   public static void main(String[] args) {
     //
+    AppConfig config = AppConfig.load();
     CamelContext context= new DefaultCamelContext();
     try{
-      context.addRoutes(new SendRouteBuilder());
+      context.addRoutes(new SendRouteBuilder(config));
 
       context.start();
       Thread.sleep(5000);
