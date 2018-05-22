@@ -29,15 +29,6 @@
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- configuration libraries -->
-    <dependency>
-      <groupId>com.typesafe</groupId>
-      <artifactId>config</artifactId>
-      <version>${typesafe-config.version}</version>
-    </dependency>
-
-
-
 
     <!-- logging -->
     <dependency>
@@ -58,6 +49,7 @@
       <version>${camel.version}</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
 </project>

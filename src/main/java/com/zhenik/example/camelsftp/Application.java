@@ -1,6 +1,7 @@
 package com.zhenik.example.camelsftp;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 
 /**
@@ -9,10 +10,16 @@ import org.apache.camel.impl.DefaultCamelContext;
 public class Application {
   public static void main(String[] args) {
     //
-    AppConfig config = AppConfig.load();
     CamelContext context= new DefaultCamelContext();
     try{
-      context.addRoutes(new SendRouteBuilder(config));
+      context.addRoutes(new RouteBuilder() {
+        @Override
+        public void configure() throws Exception {
+          from("file:samples/filesystem/input")
+              // Send file to SFTP Server
+              .to("sftp://foo@localhost:2222/samples/sftp/input?password=pass");
+        }
+      });
 
       context.start();
       Thread.sleep(5000);
